@@ -7,18 +7,16 @@
 #include <time.h>
 #include <map>
 #include <algorithm>
-
-
 #include <omp.h>
 
 using namespace std;
 
-#define ASCII_a 97 
+#define ASCII_a 97 // DON'T CHANGE (ASCII character a = 97)
 
-#define MAX_GENS 50 
-#define POP_SIZE 250 
-#define CROSSOVER_CHANCE 50 
-#define MUTATION_CHANCE 50 
+#define MAX_GENS 50 // Number of generations
+#define POP_SIZE 250 // Number of individuals in population
+#define CROSSOVER_CHANCE 50 // Out of 100 parents, CROSSOVER_CHANCE will crossover (the rest will just be copied)
+#define MUTATION_CHANCE 50 // Out of 100 children, MUTATION_CHANCE will mutate (the rest will just be copied)
 #define ALPHA 0.5 // Weight of unigrams
 #define BETA 0.25 // Weight of bigrams
 #define GAMMA 0.25 // Weight of trigrams
@@ -333,13 +331,13 @@ int main(int argc, char* argv[])
     stringstream plaintextBuffer;
     plaintextBuffer << plaintextFile.rdbuf();
     string plaintext = plaintextBuffer.str();
-    plaintext.erase(std::remove_if(plaintext.begin(), plaintext.end(), [](const unsigned& c) { return !isspace(c) && !isalpha(c); }), plaintext.end());
+    plaintext.erase(remove_if(plaintext.begin(), plaintext.end(), [](const unsigned& c) { return !isspace(c) && !isalpha(c); }), plaintext.end());
     plaintextFile.close();
     ifstream ciphertextFile("../../ciphertext.txt"); // Text to be deciphered
     stringstream ciphertextBuffer;
     ciphertextBuffer << ciphertextFile.rdbuf();
     string ciphertext = ciphertextBuffer.str();
-    ciphertext.erase(std::remove_if(ciphertext.begin(), ciphertext.end(), [](const unsigned& c) { return !isspace(c) && !isalpha(c); }), ciphertext.end());
+    ciphertext.erase(remove_if(ciphertext.begin(), ciphertext.end(), [](const unsigned& c) { return !isspace(c) && !isalpha(c); }), ciphertext.end());
     ciphertextFile.close();
     num_unigrams = numNgrams(ciphertext, 1);
     num_bigrams = numNgrams(ciphertext, 2);
@@ -350,6 +348,9 @@ int main(int argc, char* argv[])
     std::cout << "Enter the number of threads: ";
     std::cin >> n_threads;
     omp_set_num_threads(n_threads);
+
+    double start_time, end_time;
+    double total_time = 0.0;
 
     if (CUSTOM_FREQ) // Calculating frequencies from sample text file
     {
@@ -406,7 +407,8 @@ int main(int argc, char* argv[])
     {
         gen += 1;
         cout << "Generation " << gen << "\n";
-
+        
+        start_time = omp_get_wtime();
         long double fitnessSum = 0;
         calcFitness(population, &fitnessSum, ciphertext, ngrams, num_unigrams, num_bigrams, num_trigrams);
         selection(population, &fitnessSum);
@@ -414,6 +416,11 @@ int main(int argc, char* argv[])
         mutation(population);
 
         printStats(population, &fitnessSum, ciphertext, plaintext);
+        end_time = omp_get_wtime();
+        double iteration_time = end_time - start_time;
+        total_time += iteration_time;
+
+        cout << "Time for iteration " << gen << ": " << iteration_time << " sec.\n";
     }
     time = clock() - time;
     cout << "Time for " << MAX_GENS << " generations and " << POP_SIZE << " population: " << (float)time / CLOCKS_PER_SEC << " sec.\n";
