@@ -7,7 +7,9 @@
 #include <time.h>
 #include <map>
 #include <algorithm>
-#include <numeric>
+#include "../../../../../../../../usr/include/c++/11/bits/algorithmfwd.h"
+#include <ctime> 
+
 using namespace std;
 
 #define ASCII_a 97 // DON'T CHANGE (ASCII character a = 97)
@@ -131,7 +133,7 @@ const map<string, long double> countNgrams(const string& text, map<string, long 
 void initPopulation(Individual population[])
 {
     for (int i = 0; i < POP_SIZE; i ++)
-        std::shuffle(begin(population[i].genes), end(population[i].genes) - 1, std::default_random_engine(std::random_device()()));
+        random_shuffle(begin(population[i].genes), end(population[i].genes) - 1);
 }
 
 /// <summary>
@@ -321,6 +323,9 @@ int main()
     map<string, long double> ngrams;
     long double num_unigrams, num_bigrams, num_trigrams;
 
+    double start_time, end_time;
+    double total_time = 0.0;
+
     // Reading input from files
     ifstream plaintextFile("../../plaintext.txt"); // Target text
     stringstream plaintextBuffer;
@@ -393,7 +398,7 @@ int main()
     {
         gen += 1;
         cout << "Generation " << gen << "\n";
-
+        start_time = clock();
         long double fitnessSum = 0;
         calcFitness(population, &fitnessSum, ciphertext, ngrams, num_unigrams, num_bigrams, num_trigrams);
         selection(population, &fitnessSum);
@@ -401,6 +406,15 @@ int main()
         mutation(population);
 
         printStats(population, &fitnessSum, ciphertext, plaintext);
+
+        end_time = clock();
+        double iteration_time = (double)(end_time - start_time) / CLOCKS_PER_SEC; // Convert CPU time to seconds
+        total_time += iteration_time;
+
+        cout << "Time for iteration " << gen << ": " << iteration_time << " sec.\n";
+
+
+        
     }
     time = clock() - time;
     cout << "Time for " << MAX_GENS << " generations and " << POP_SIZE << " population: " << (float)time / CLOCKS_PER_SEC << " sec.\n";
