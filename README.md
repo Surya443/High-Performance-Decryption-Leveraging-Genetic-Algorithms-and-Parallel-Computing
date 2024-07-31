@@ -1,4 +1,4 @@
-# Genetic Algorithm Project
+# Decyphering text using parallelized Genetic Algorithm
 
 This project implements a parallelized genetic algorithm to solve decyphering problems. The algorithm includes selection, crossover, and mutation operations to evolve a population of individuals towards an optimal solution.
 
