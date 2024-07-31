@@ -36,12 +36,13 @@ NonParallel.h: Header file for NonParallel.cpp.
 
 
 
-### Aspects to Parallelize:
+## Aspects to Parallelize:
 
 Parallelizing aspects like Fitness calculation,Initialization of individuals, Selection of parents, Crossover and Mutation operations can improve
 efficiency, performance, lead to faster convergence and speed up the optimization process
 
-### ALGORITHM PARALLELISM
+### Algorithm Parallelism
+
 Each processor or core can independently evaluate the fitness of a
 subset of individuals.
 Different processors can independently perform selection operations
@@ -50,11 +51,13 @@ concurrently.
 • Mutation- Multiple processors can perform mutation operations on
 different individuals simultaneously.
 • Population replacement can be parallelized
-##TASK PARALLELISM
+
+### TASK PARALLELISM
+
 Dividing overall computation into independent tasks.
 Assigning different processors to different tasks require proper
 coordination and synchronization
-
+```
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
