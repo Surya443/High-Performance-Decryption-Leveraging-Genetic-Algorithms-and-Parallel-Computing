@@ -6,8 +6,8 @@ This project implements a genetic algorithm to solve optimization problems. The 
 
 - [Installation](#installation)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+
+
 
 ## Installation
 
@@ -57,8 +57,8 @@ different individuals simultaneously.
 Dividing overall computation into independent tasks.
 Assigning different processors to different tasks require proper
 coordination and synchronization
-```
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
-```
+
+
+
+
