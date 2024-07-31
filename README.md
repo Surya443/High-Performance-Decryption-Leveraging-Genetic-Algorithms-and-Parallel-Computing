@@ -1,6 +1,6 @@
 # Genetic Algorithm Project
 
-This project implements a genetic algorithm to solve optimization problems. The algorithm includes selection, crossover, and mutation operations to evolve a population of individuals towards an optimal solution.
+This project implements a parallelized genetic algorithm to solve decyphering problems. The algorithm includes selection, crossover, and mutation operations to evolve a population of individuals towards an optimal solution.
 
 ## Table of Contents
 
