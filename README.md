@@ -5,7 +5,6 @@ This project implements a genetic algorithm to solve optimization problems. The 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
@@ -25,13 +24,12 @@ This project implements a genetic algorithm to solve optimization problems. The 
     g++ -o genetic_algorithm main.cpp NonParallel.cpp -std=c++11
     ```
 
-## Usage
 
-Run the compiled executable:
 
-./genetic_algorithm
 
-## Project Structure
+
+## Project Structure 
+
 NonParallel.cpp: Contains the implementation of the genetic algorithm, including selection, crossover, and mutation functions in a non parallelised manner (vanilla version)
 Parallel.cpp: Contains the code for parallelized implementation of the genetic algorithm, including selection, crossover, and mutation functions using OPENMP
 NonParallel.h: Header file for NonParallel.cpp.
