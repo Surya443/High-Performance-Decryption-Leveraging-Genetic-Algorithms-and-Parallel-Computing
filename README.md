@@ -36,14 +36,15 @@ NonParallel.h: Header file for NonParallel.cpp.
 
 
 
-##Aspects to Parallelize:
+### Aspects to Parallelize:
+
 Parallelizing aspects like Fitness calculation,Initialization of individuals, Selection of parents, Crossover and Mutation operations can improve
 efficiency, performance, lead to faster convergence and speed up the optimization process
 
-##ALGORITHM PARALLELISM
--[Each processor or core can independently evaluate the fitness of a
-subset of individuals.]
--[Different processors can independently perform selection operations.]
+### ALGORITHM PARALLELISM
+Each processor or core can independently evaluate the fitness of a
+subset of individuals.
+Different processors can independently perform selection operations
 • Crossover- Different pairs of parents can undergo crossover
 concurrently.
 • Mutation- Multiple processors can perform mutation operations on
