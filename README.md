@@ -32,7 +32,7 @@ This project implements a parallelized genetic algorithm to solve decyphering pr
 
 NonParallel.cpp: Contains the implementation of the genetic algorithm, including selection, crossover, and mutation functions in a non parallelised manner (vanilla version)
 Parallel.cpp: Contains the code for parallelized implementation of the genetic algorithm, including selection, crossover, and mutation functions using OPENMP
-NonParallel.h: Header file for NonParallel.cpp.
+
 ![image](output/comparison_graph.jpeg)
  ### serialized/parallelized perfomance comparison
 
